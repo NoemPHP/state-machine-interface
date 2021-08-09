@@ -5,6 +5,10 @@ namespace Noem\State;
 interface StateInterface extends \Stringable
 {
 
+    /**
+     * Compare with another state instance. This method is used to prevent ambiguity between
+     * string & instance comparisons It SHOULD be preferred over scalar string comparisons whenever possible
+     */
     public function equals(StateInterface $otherState): bool;
 
     /**

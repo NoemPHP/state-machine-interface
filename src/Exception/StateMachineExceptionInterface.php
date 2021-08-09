@@ -2,7 +2,7 @@
 
 namespace Noem\State\Exception;
 
-interface StateMachineExceptionInterface
+interface StateMachineExceptionInterface extends \Throwable
 {
 
 }

@@ -23,8 +23,8 @@ interface ObservableStateMachineInterface extends StateMachineInterface
      * Adds an observer to the stack.
      * When a state machine exits a state, all ExitStateObservers MUST be notified.
      * When a new state is entered, all EnterStateObservers MUST be notified
-     * When a state action is triggered (on implementors of StatefulActorInterface), all ActionObservers MUST
-     * be notified
+     * When a state action is triggered (on implementors of StatefulActorInterface),
+     * all ActionObservers MUST be notified
      *
      * @see EnterStateObserver
      * @see ExitStateObserver
