@@ -35,4 +35,5 @@ plugins:
   - jekyll-sitemap
   - jemoji
 
-permalink: pretty
+permalink: prett
+  y
