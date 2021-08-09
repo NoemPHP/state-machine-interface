@@ -36,3 +36,4 @@ plugins:
   - jemoji
 
 permalink: pretty
+theme: jekyll-theme-cayman
