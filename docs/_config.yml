@@ -35,5 +35,5 @@ plugins:
   - jekyll-sitemap
   - jemoji
 
-permalink: prett
-  y
+permalink: pretty
+theme: jekyll-theme-cayman
