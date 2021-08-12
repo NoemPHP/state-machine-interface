@@ -11,3 +11,4 @@ This repository contains contracts for building and consuming event-based finite
 * **State Machine** - The main entrypoint for triggers and actions. Responsible for keeping track of the current state, performing transitions and notifying subscribers.
 * **Transition Provider** - Returns a valid Transition object for any given _trigger_.
 * **State Machine Observer** - Allows outside code to subscribe to state updates.
+* **State Storage** - An abstraction layer to interface the process of loading & saving the active state with various sources (eg. memory, db, Redis)
