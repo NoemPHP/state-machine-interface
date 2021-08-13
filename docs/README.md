@@ -52,5 +52,25 @@ The purpose of a class implementing this interface is to keep track of the activ
 ### [`TransitionProviderInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
 
 ```php:src/StateMachineInterface.php
+<?php
 
+declare(strict_types=1);
+
+namespace Noem\State;
+
+use Noem\State\Transition\TransitionInterface;
+
+interface StateMachineInterface
+{
+
+    /**
+     * Implementing methods MUST receive a list of possible TransitionInterface objects
+     * from a TransitionProviderInterface.
+     * If a transition object is returned, its target state MUST be transitioned to.
+     * @see TransitionInterface::target()
+     * @param object $payload
+     * @return StateMachineInterface
+     */
+    public function trigger(object $payload): self;
+}
 ```
