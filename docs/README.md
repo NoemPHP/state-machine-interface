@@ -1,7 +1,10 @@
 # State Machine Interface
-This repository contains contracts for building and consuming event-based finite state machines.
+{: .no_toc }
 
-* TOC 
+This repository contains contracts for building and consuming event-based finite state machines.
+## Table of contents
+{: .no_toc .text-delta }
+* [The pretty GH Pages version of this document shows a nice table of contents here](https://noemphp.github.io/state-machine-interface/) 
 {:toc}
 ---
 
@@ -19,6 +22,8 @@ This repository contains contracts for building and consuming event-based finite
 
 ## Concepts
 
-### StateMachineInterface
+### `StateMachineInterface`
+
+The purpose of a class implementing this interface is to keep track of the active state as well as to delegate events from the outside application in case the extended `ObservableStateMachineInterface` is used . It's easy to be tempted to cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some expected responsibility away from the class. 
 
 ### TransitionProviderInterface
