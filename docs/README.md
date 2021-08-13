@@ -51,6 +51,6 @@ The purpose of a class implementing this interface is to keep track of the activ
 
 ### [`TransitionProviderInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
 
-```php : src/StateMachineInterface.php
+```php :src/StateMachineInterface.php
 
 ```
