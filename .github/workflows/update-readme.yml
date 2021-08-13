@@ -17,7 +17,7 @@ jobs:
       - name: Markdown Embed Code From File - Fork
         uses: technology-studio-forks/markdown-embed-code@v1.1.0
         with:
-          markdown: "README.md"
+          markdown: "docs/README.md"
           token: ${{ secrets.GITHUB_TOKEN }}
           message: "synchronizing Readme"
           silent: true
