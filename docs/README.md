@@ -1,8 +1,12 @@
 # State Machine Interface
-
 This repository contains contracts for building and consuming event-based finite state machines.
 
-## Concepts
+* TOC 
+{:toc}
+---
+
+
+## Terminology
 
 * **State** - A named representation of application state which can be determined either _explicitly_ through a direct transition, or _implictly_ through a chain of higher-order super-states.
 * **Transition** - Defines when and how to move from one state to another
@@ -12,3 +16,9 @@ This repository contains contracts for building and consuming event-based finite
 * **Transition Provider** - Returns a valid Transition object for any given _trigger_.
 * **State Machine Observer** - Allows outside code to subscribe to state updates.
 * **State Storage** - An abstraction layer to interface the process of loading & saving the active state with various sources (eg. memory, db, Redis)
+
+## Concepts
+
+### StateMachineInterface
+
+### TransitionProviderInterface
