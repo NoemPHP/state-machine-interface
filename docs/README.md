@@ -21,9 +21,8 @@ This repository contains contracts for building and consuming event-based finite
 
 ## Concepts
 
-### `StateMachineInterface`
+### [`StateMachineInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
 
-The purpose of a class implementing this interface is to keep track of the active state as well as to delegate events from the outside application in case the extended `ObservableStateMachineInterface` is used . It's easy to be tempted to cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some expected responsibility away from the class. 
 
 ```php:src/StateMachineInterface.php
 <?php
@@ -49,4 +48,9 @@ interface StateMachineInterface
 }
 ```
 
-### TransitionProviderInterface
+The purpose of a class implementing this interface is to keep track of the active state as well as to delegate events from the outside application in case the extended `ObservableStateMachineInterface` is used . It's easy to be tempted to cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some expected responsibility away from the class. 
+
+### [`TransitionProviderInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
+
+```php:src/StateMachineInterface.php
+```
