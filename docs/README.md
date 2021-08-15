@@ -22,9 +22,6 @@ This repository contains contracts for building and consuming event-based finite
 ## Concepts
 
 ### [`StateMachineInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
-<details>
-  <summary>Click to show source code</summary>
-
 
 ```php:src/StateMachineInterface.php
 <?php
@@ -50,9 +47,6 @@ interface StateMachineInterface
 
 ```
 
-</details>
-
-
 The purpose of a class implementing this interface is to keep track of the active state as well as to delegate events from the outside application in case the extended `ObservableStateMachineInterface` is used . It's easy to be tempted to cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some expected responsibility away from the class. 
 
 #### Performing transitions
@@ -68,10 +62,6 @@ An `ObservableStateMachineInterface` MUST notify all of its subscribers when a t
 There are 2 additional interfaces related to event handling that a state machine can optionally implement:
 
 **ObservableStateMachineInterface**
-
-<details>
-  <summary>Click to show source code</summary>
-
 
 ```php:src/ObservableStateMachineInterface.php
 <?php
@@ -124,14 +114,8 @@ interface ObservableStateMachineInterface extends StateMachineInterface
     public function detach(StateMachineObserver $observer): ObservableStateMachineInterface;
 }
 ```
-</details>
-
 
 **StatefulActorInterface**
-
-<details>
-  <summary>Click to show source code</summary>
-
 
 ```php:src/StatefulActorInterface.php
 <?php
@@ -151,13 +135,9 @@ interface StatefulActorInterface
     public function action(object $payload): object;
 }
 ```
-</details>
 
 
 ### [`TransitionProviderInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
-<details>
-  <summary>Click to show source code</summary>
-
 
 ```php:src/Transition/TransitionProviderInterface.php
 <?php
@@ -180,7 +160,6 @@ interface TransitionProviderInterface
     public function getTransitionForTrigger(StateInterface $state, object $trigger): ?TransitionInterface;
 }
 ```
-</details>
 
 
 The TransitionProvider is responsible for returning a valid transition based on the given action - and the current state. It is similar in intention and function to PSR-14's ListenerProvider:
