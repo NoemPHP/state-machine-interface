@@ -24,7 +24,7 @@ This repository contains contracts for building and consuming event-based finite
 ### [`StateMachineInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
 <details>
   <summary>Click to show source code</summary>
-
+  <pre>
 
 ```php:src/StateMachineInterface.php
 <?php
@@ -49,6 +49,8 @@ interface StateMachineInterface
 }
 
 ```
+
+  </pre>
 </details>
 
 
