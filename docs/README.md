@@ -59,11 +59,11 @@ There are 2 additional interfaces related to event handling that a state machine
 
 **ObservableStateMachineInterface**
 
-```php:src/ObservableStateMachineInterface.php ```
+`php:src/ObservableStateMachineInterface.php `
 
 **StatefulActorInterface**
 
-```php:src/StatefulActorInterface.php ```
+`php:src/StatefulActorInterface.php `
 
 ### [`TransitionProviderInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
 
