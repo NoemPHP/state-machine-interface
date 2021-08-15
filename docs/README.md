@@ -49,12 +49,25 @@ interface StateMachineInterface
 
 The purpose of a class implementing this interface is to keep track of the active state as well as to delegate events from the outside application in case the extended `ObservableStateMachineInterface` is used . It's easy to be tempted to cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some expected responsibility away from the class. 
 
-Consequently, the only required method on the base interface is a way to react to an external `trigger` (-> event). When the state machine is triggered, is **MUST** receive a valid `Transition` object from a `TransitionProvider`. This is similar in intention and function to PSR-14's ListenerProvider:
-* It reduces complexity of the state machine object by shielding it from knowledge about where states and transitions come from and how they interact
-* Thus - in the best case - its responsibilities are reduced to
-  - Keeping track of the current state
-  - Dealing with events 
-* Shifting transitions and interaction with the state graph outside of the machine enables interop between multiple packages: An `AggregateTransitionProvider` might gather the transitions from a number of modules, resulting in a state machine built from many loosely coupled fragments.
+
+#### Performing transitions
+
+Consequently, the only required method on the base interface is a way to react to an external `trigger` (-> event). When the state machine is triggered, is **MUST** receive a valid `Transition` object from a `TransitionProvider`. 
+
+#### Handling events
+
+There are 2 additional interfaces related to event handling that a state machine can optionally implement:
+
+**ObservableStateMachineInterface**
+
+
+```php:src/ObservableStateMachineInterface.php ```
+
+
+**StatefulActorInterface**
+
+
+```php:src/StatefulActorInterface.php ```
 
 ### [`TransitionProviderInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
 
@@ -79,3 +92,9 @@ interface TransitionProviderInterface
     public function getTransitionForTrigger(StateInterface $state, object $trigger): ?TransitionInterface;
 }
 ```
+The TransitionProvider is similar in intention and function to PSR-14's ListenerProvider:
+* It reduces complexity of the state machine object by shielding it from knowledge about where states and transitions come from and how they interact
+* Thus - in the best case - its responsibilities are reduced to
+  - Keeping track of the current state
+  - Dealing with events 
+* Shifting transitions and interaction with the state graph outside of the machine enables interop between multiple packages: An `AggregateTransitionProvider` might gather the transitions from a number of modules, resulting in a state machine built from many loosely coupled fragments.
