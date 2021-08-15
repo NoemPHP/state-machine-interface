@@ -22,7 +22,9 @@ This repository contains contracts for building and consuming event-based finite
 ## Concepts
 
 ### [`StateMachineInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
-
+<details>
+  <summary>Click to show source code</summary>
+    
 ```php:src/StateMachineInterface.php
 <?php
 
@@ -46,6 +48,7 @@ interface StateMachineInterface
 }
 
 ```
+</details>
 
 The purpose of a class implementing this interface is to keep track of the active state as well as to delegate events from the outside application in case the extended `ObservableStateMachineInterface` is used . It's easy to be tempted to cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some expected responsibility away from the class. 
 
@@ -53,12 +56,19 @@ The purpose of a class implementing this interface is to keep track of the activ
 
 Consequently, the only required method on the base interface is a way to react to an external `trigger` (-> event). When the state machine is triggered, is **MUST** receive a valid `Transition` object from a `TransitionProvider`. 
 
+A state machine MAY receive a `StateStorageInterface` as an injected depency. If this is used, `StateStorageInterface::save()` MUST be called with the new state so that it can be saved externally.
+
+An `ObservableStateMachineInterface` MUST notify all of its subscribers when a transition is made. More in this in the next section.
+
 #### Handling events
 
 There are 2 additional interfaces related to event handling that a state machine can optionally implement:
 
 **ObservableStateMachineInterface**
 
+<details>
+  <summary>Click to show source code</summary>
+    
 ```php:src/ObservableStateMachineInterface.php
 <?php
 
@@ -110,8 +120,12 @@ interface ObservableStateMachineInterface extends StateMachineInterface
     public function detach(StateMachineObserver $observer): ObservableStateMachineInterface;
 }
 ```
+</details>
 
 **StatefulActorInterface**
+
+<details>
+  <summary>Click to show source code</summary>
 
 ```php:src/StatefulActorInterface.php
 <?php
@@ -131,8 +145,11 @@ interface StatefulActorInterface
     public function action(object $payload): object;
 }
 ```
+</details>
 
 ### [`TransitionProviderInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
+<details>
+  <summary>Click to show source code</summary>
 
 ```php:src/Transition/TransitionProviderInterface.php
 <?php
@@ -155,6 +172,8 @@ interface TransitionProviderInterface
     public function getTransitionForTrigger(StateInterface $state, object $trigger): ?TransitionInterface;
 }
 ```
+</details>
+
 The TransitionProvider is responsible for returning a valid transition based on the given action - and the current state. It is similar in intention and function to PSR-14's ListenerProvider:
 * It reduces complexity of the state machine object by shielding it from knowledge about where states and transitions come from and how they interact
 * Thus - in the best case - its responsibilities are reduced to
