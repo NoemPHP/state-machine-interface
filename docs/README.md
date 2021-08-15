@@ -52,8 +52,8 @@ The purpose of a class implementing this interface is to keep track of the activ
 Consequently, the only required method on the base interface is a way to react to an external `trigger` (-> event). When the state machine is triggered, is **MUST** receive a valid `Transition` object from a `TransitionProvider`. This is similar in intention and function to PSR-14's ListenerProvider:
 * It reduces complexity of the state machine object by shielding it from knowledge about where states and transitions come from and how they interact
 * Thus - in the best case - its responsibilities are reduced to
-    - Keeping track of the current state
-    - Dealing with events 
+  - Keeping track of the current state
+  - Dealing with events 
 * Shifting transitions and interaction with the state graph outside of the machine enables interop between multiple packages: An `AggregateTransitionProvider` might gather the transitions from a number of modules, resulting in a state machine built from many loosely coupled fragments.
 
 ### [`TransitionProviderInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
@@ -61,23 +61,21 @@ Consequently, the only required method on the base interface is a way to react t
 ```php:src/Transition/TransitionProviderInterface.php
 <?php
 
-declare(strict_types=1);
+namespace Noem\State\Transition;
 
-namespace Noem\State;
+use Noem\State\StateInterface;
 
-use Noem\State\Transition\TransitionInterface;
-
-interface StateMachineInterface
+interface TransitionProviderInterface
 {
 
     /**
-     * Implementing methods MUST receive a list of possible TransitionInterface objects
-     * from a TransitionProviderInterface.
-     * If a transition object is returned, its target state MUST be transitioned to.
-     * @see TransitionInterface::target()
-     * @param object $payload
-     * @return StateMachineInterface
+     * Return a Transition object that matches the given state and trigger
+     *
+     * @param StateInterface $state For comparing the source state against
+     * @param object $trigger For evaluating whether the transition is enabled
+     *
+     * @return TransitionInterface|null
      */
-    public function trigger(object $payload): self;
+    public function getTransitionForTrigger(StateInterface $state, object $trigger): ?TransitionInterface;
 }
 ```
