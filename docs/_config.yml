@@ -24,7 +24,9 @@ gh_edit_source: docs # The directory containing the docs. Default: docs
 
 # Everything below should be copy and pasted into package repos
 remote_theme: pages-themes/cayman@v0.2.0
-#markdown: kramdown
+markdown: kramdown
+kramdown:
+  parse_block_html: true
 ###############################################################
 
 # Everything below should be copy and pasted into package repos
