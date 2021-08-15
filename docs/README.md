@@ -26,6 +26,7 @@ This repository contains contracts for building and consuming event-based finite
   <summary>Click to show source code</summary>
   <pre>
 
+
 ```php:src/StateMachineInterface.php
 <?php
 
