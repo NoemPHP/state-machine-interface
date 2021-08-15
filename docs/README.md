@@ -26,8 +26,6 @@ This repository contains contracts for building and consuming event-based finite
 ```php:src/StateMachineInterface.php
 <?php
 
-declare(strict_types=1);
-
 namespace Noem\State;
 
 use Noem\State\Transition\TransitionInterface;
