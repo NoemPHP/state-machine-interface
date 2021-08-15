@@ -49,7 +49,6 @@ interface StateMachineInterface
 
 The purpose of a class implementing this interface is to keep track of the active state as well as to delegate events from the outside application in case the extended `ObservableStateMachineInterface` is used . It's easy to be tempted to cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some expected responsibility away from the class. 
 
-
 #### Performing transitions
 
 Consequently, the only required method on the base interface is a way to react to an external `trigger` (-> event). When the state machine is triggered, is **MUST** receive a valid `Transition` object from a `TransitionProvider`. 
@@ -60,14 +59,11 @@ There are 2 additional interfaces related to event handling that a state machine
 
 **ObservableStateMachineInterface**
 
-
-```php:src/ObservableStateMachineInterface.php ```
-
+`php:src/ObservableStateMachineInterface.php `
 
 **StatefulActorInterface**
 
-
-```php:src/StatefulActorInterface.php ```
+`php:src/StatefulActorInterface.php `
 
 ### [`TransitionProviderInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
 
