@@ -59,11 +59,11 @@ There are 2 additional interfaces related to event handling that a state machine
 
 **ObservableStateMachineInterface**
 
-`php:src/ObservableStateMachineInterface.php `
+```php:src/ObservableStateMachineInterface.php ```
 
 **StatefulActorInterface**
 
-`php:src/StatefulActorInterface.php `
+```php:src/StatefulActorInterface.php ```
 
 ### [`TransitionProviderInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
 
@@ -88,7 +88,7 @@ interface TransitionProviderInterface
     public function getTransitionForTrigger(StateInterface $state, object $trigger): ?TransitionInterface;
 }
 ```
-The TransitionProvider is similar in intention and function to PSR-14's ListenerProvider:
+The TransitionProvider is responsible for returning a valid transition based on the given action - and the current state. It is similar in intention and function to PSR-14's ListenerProvider:
 * It reduces complexity of the state machine object by shielding it from knowledge about where states and transitions come from and how they interact
 * Thus - in the best case - its responsibilities are reduced to
   - Keeping track of the current state
