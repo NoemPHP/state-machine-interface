@@ -36,8 +36,7 @@ interface StateMachineInterface
 {
 
     /**
-     * Implementing methods MUST receive a list of possible TransitionInterface objects
-     * from a TransitionProviderInterface.
+     * Implementing methods MUST receive a TransitionInterface object from a TransitionProviderInterface.
      * If a transition object is returned, its target state MUST be transitioned to.
      * @see TransitionInterface::target()
      * @param object $payload
@@ -45,6 +44,7 @@ interface StateMachineInterface
      */
     public function trigger(object $payload): self;
 }
+
 ```
 
 The purpose of a class implementing this interface is to keep track of the active state as well as to delegate events from the outside application in case the extended `ObservableStateMachineInterface` is used . It's easy to be tempted to cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some expected responsibility away from the class. 
