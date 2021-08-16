@@ -2,7 +2,7 @@
 
 namespace Noem\State;
 
-interface StatefulActorInterface
+interface ActorInterface
 {
 
     /**

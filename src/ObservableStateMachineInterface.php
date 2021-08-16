@@ -22,7 +22,7 @@ interface ObservableStateMachineInterface extends StateMachineInterface
      * When a state action is triggered (on implementors of StatefulActorInterface),
      * all ActionObservers MUST be notified
      *
-     * @see Observer\EnterStateObserver, Observer\ExitStateObserver, Observer\ActionObserver, StatefulActorInterface
+     * @see Observer\EnterStateObserver, Observer\ExitStateObserver, Observer\ActionObserver, ActorInterface
      *
      * @param Observer\StateMachineObserver $observer
      *
