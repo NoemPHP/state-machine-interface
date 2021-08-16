@@ -173,7 +173,7 @@ class MyFSM implements StateMachineInterface, ActorInterface {
 }
 ```
 
----
+* * *
 
 ### 2.2 - [`TransitionProviderInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
 
