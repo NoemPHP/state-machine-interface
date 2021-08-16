@@ -31,7 +31,6 @@ sources (eg. memory, db, Redis)
 
 ### 2.1 - [`StateMachineInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
 
-
 The purpose of a class implementing this interface is to keep track of the active state as well as to delegate events
 from the outside application in case the extended `ObservableStateMachineInterface` is used . It's easy to be tempted to
 cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some
@@ -65,7 +64,6 @@ Use-cases for `StateMachineObserver`s include:
 * Proving internal stateful behaviour defined as a state's `onEntry`, `onExit` or `action` callbacks
 * Logging
 * Bridging to external event systems
-
 
 **ActorInterface**
 
