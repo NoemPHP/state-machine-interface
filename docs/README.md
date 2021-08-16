@@ -9,25 +9,25 @@ This repository contains contracts for building and consuming event-based finite
 {: .no_toc .text-delta }
 
 * [The pretty GH Pages version of this document shows a nice table of contents here](https://noemphp.github.io/state-machine-interface/)
-  {:toc}
+{:toc}
 
 * * *
 
 ## Terminology
 
 * **State** - A named representation of application state which can be determined either *explicitly* through a direct
-  transition, or *implictly* through a chain of higher-order super-states.
+transition, or *implictly* through a chain of higher-order super-states.
 * **Transition** - Defines when and how to move from one state to another
 * **Trigger** - An event that would cause a transition. Any PHP `object` can be used as a trigger, making this interface
-  highly interoperable with PSR-14 based event systems.
+highly interoperable with PSR-14 based event systems.
 * **Action** - An action is again an `object` and works like an event. Its handlers are based on the current state
-  though, enabling stateful behaviour in a very flexible manner.
+though, enabling stateful behaviour in a very flexible manner.
 * **State Machine** - The main entrypoint for triggers and actions. Responsible for keeping track of the current state,
-  performing transitions and notifying subscribers.
+performing transitions and notifying subscribers.
 * **Transition Provider** - Returns a valid Transition object for any given *trigger*.
 * **State Machine Observer** - Allows outside code to subscribe to state updates.
 * **State Storage** - An abstraction layer to interface the process of loading & saving the active state with various
-  sources (eg. memory, db, Redis)
+sources (eg. memory, db, Redis)
 
 ## Concepts
 
@@ -102,7 +102,7 @@ interface ObservableStateMachineInterface extends StateMachineInterface
      * When a state action is triggered (on implementors of StatefulActorInterface),
      * all ActionObservers MUST be notified
      *
-     * @see Observer\EnterStateObserver, Observer\ExitStateObserver, Observer\ActionObserver, StatefulActorInterface
+     * @see Observer\EnterStateObserver, Observer\ExitStateObserver, Observer\ActionObserver, ActorInterface
      *
      * @param Observer\StateMachineObserver $observer
      *
@@ -133,7 +133,7 @@ method.
 
 namespace Noem\State;
 
-interface StatefulActorInterface
+interface ActorInterface
 {
 
     /**
@@ -145,8 +145,9 @@ interface StatefulActorInterface
      */
     public function action(object $payload): object;
 }
+
 ```
-This is the primary way to interface the application logic with the state machine. Whenever state-dependent behaviour or data is required, 
+This is the primary way to interface the application logic with the state machine. Whenever state-dependent behaviour or data is required,
 a corresponding action can be requested from the state machine
 It is meant to serve as a generic and flexible entrypoint for any use case. It is a good idea to wrap this method with
 more explicit sugar methods:
@@ -201,10 +202,10 @@ The TransitionProvider is responsible for returning a valid transition based on 
 state. It is similar in intention and function to PSR-14's ListenerProvider:
 
 * It reduces complexity of the state machine object by shielding it from knowledge about where states and transitions
-  come from and how they interact
+come from and how they interact
 * Thus - in the best case - its responsibilities are reduced to
-    - Keeping track of the current state
-    - Dealing with events
+  - Keeping track of the current state
+  - Dealing with events
 * Shifting transitions and interaction with the state graph outside of the machine enables interop between multiple
-  packages: An `AggregateTransitionProvider` might gather the transitions from a number of modules, resulting in a state
-  machine built from many loosely coupled fragments.
+packages: An `AggregateTransitionProvider` might gather the transitions from a number of modules, resulting in a state
+machine built from many loosely coupled fragments.
