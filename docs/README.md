@@ -11,7 +11,7 @@ This repository contains contracts for building and consuming event-based finite
 
 * * *
 
-## 1. Terminology
+## 1 - Terminology
 
 * **State** - A named representation of application state which can be determined either *explicitly* through a direct
 transition, or *implictly* through a chain of higher-order super-states.
@@ -66,7 +66,7 @@ the state machine is triggered, is **MUST** receive a valid `Transition` object 
 A state machine MAY receive a `StateStorageInterface` as an injected depency. If this is
 used, `StateStorageInterface::save()` MUST be called with the new state so that it can be saved externally.
 
-An `ObservableStateMachineInterface` MUST notify all of its subscribers when a transition is made. More in this in the
+An `ObservableStateMachineInterface` MUST notify all of its subscribers when a transition is made. More about this in the
 next section.
 
 #### 2.1.2 - Handling events
@@ -74,6 +74,18 @@ next section.
 There are 2 additional interfaces related to event handling that a state machine can optionally implement:
 
 **ObservableStateMachineInterface**
+
+This interface defines an Observer pattern segregated into 3 areas of interest:
+* Entering a state
+* Exiting a state
+* Performing an action
+
+State machines can therefore be written without being aware of any event-handling logic, let along providing their own.
+Use-cases for `StateMachineObserver`s include:
+
+* Proving internal stateful behaviour defined as a state's `onEntry`, `onExit` or `action` callbacks
+* Logging
+* Bridging to external event systems
 
 ```php:src/ObservableStateMachineInterface.php
 <?php

@@ -10,7 +10,9 @@ interface StateMachineInterface
     /**
      * Implementing methods MUST receive a TransitionInterface object from a TransitionProviderInterface.
      * If a transition object is returned, its target state MUST be transitioned to.
+     *
      * @see TransitionInterface::target()
+     *
      * @param object $payload
      * @return StateMachineInterface
      */
