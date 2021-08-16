@@ -31,7 +31,7 @@ interface ObservableStateMachineInterface extends StateMachineInterface
      *
      * @return self
      */
-    public function attach(Observer\StateMachineObserver $observer): ObservableStateMachineInterface;
+    public function attach(Observer\StateMachineObserver $observer): self;
 
     /**
      * Removes an observer from the stack.
@@ -39,7 +39,7 @@ interface ObservableStateMachineInterface extends StateMachineInterface
      *
      * @param Observer\StateMachineObserver $observer
      *
-     * @return ObservableStateMachineInterface
+     * @return self
      */
-    public function detach(Observer\StateMachineObserver $observer): ObservableStateMachineInterface;
+    public function detach(Observer\StateMachineObserver $observer): self;
 }
