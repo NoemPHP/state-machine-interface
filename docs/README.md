@@ -1,11 +1,9 @@
 # State Machine Interface
-
 {: .no_toc }
 
 This repository contains contracts for building and consuming event-based finite state machines.
 
 ## Table of contents
-
 {: .no_toc .text-delta }
 
 * [The pretty GH Pages version of this document shows a nice table of contents here](https://noemphp.github.io/state-machine-interface/)
@@ -13,7 +11,7 @@ This repository contains contracts for building and consuming event-based finite
 
 * * *
 
-## Terminology
+## 1. Terminology
 
 * **State** - A named representation of application state which can be determined either *explicitly* through a direct
 transition, or *implictly* through a chain of higher-order super-states.
@@ -29,9 +27,9 @@ performing transitions and notifying subscribers.
 * **State Storage** - An abstraction layer to interface the process of loading & saving the active state with various
 sources (eg. memory, db, Redis)
 
-## Concepts
+## 2 -  Concepts
 
-### [`StateMachineInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
+### 2.1 - [`StateMachineInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
 
 ```php:src/StateMachineInterface.php
 <?php
@@ -60,7 +58,7 @@ from the outside application in case the extended `ObservableStateMachineInterfa
 cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some
 expected responsibility away from the class.
 
-#### Performing transitions
+#### 2.1.1 - Performing transitions
 
 Consequently, the only required method on the base interface is a way to react to an external `trigger` (-> event). When
 the state machine is triggered, is **MUST** receive a valid `Transition` object from a `TransitionProvider`.
@@ -71,7 +69,7 @@ used, `StateStorageInterface::save()` MUST be called with the new state so that 
 An `ObservableStateMachineInterface` MUST notify all of its subscribers when a transition is made. More in this in the
 next section.
 
-#### Handling events
+#### 2.1.2 - Handling events
 
 There are 2 additional interfaces related to event handling that a state machine can optionally implement:
 
@@ -148,9 +146,10 @@ interface ActorInterface
 
 ```
 This is the primary way to interface the application logic with the state machine. Whenever state-dependent behaviour or data is required,
-a corresponding action can be requested from the state machine
-It is meant to serve as a generic and flexible entrypoint for any use case. It is a good idea to wrap this method with
-more explicit sugar methods:
+a corresponding action can be requested from the state machine.
+
+It is meant to serve as a generic and flexible entrypoint for any use case, so it is a good idea to wrap this method with
+more explicit sugar methods to directly address the usage scenarios of your specific state machine.
 
 ```php
 namespace Noem\State;
@@ -174,7 +173,12 @@ class MyFSM implements StateMachineInterface, ActorInterface {
 }
 ```
 
-### [`TransitionProviderInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
+---
+
+### 2.2 - [`TransitionProviderInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
+
+The TransitionProvider is responsible for returning a valid transition based on the given action and the current
+state.
 
 ```php:src/Transition/TransitionProviderInterface.php
 <?php
@@ -198,14 +202,13 @@ interface TransitionProviderInterface
 }
 ```
 
-The TransitionProvider is responsible for returning a valid transition based on the given action - and the current
-state. It is similar in intention and function to PSR-14's ListenerProvider:
+It is similar in intention and function to PSR-14's ListenerProvider:
 
 * It reduces complexity of the state machine object by shielding it from knowledge about where states and transitions
 come from and how they interact
-* Thus - in the best case - its responsibilities are reduced to
+* Thus, its responsibilities CAN be reduced to
   - Keeping track of the current state
   - Dealing with events
-* Shifting transitions and interaction with the state graph outside of the machine enables interop between multiple
+* Shifting transitions and interaction with the state graph outside the machine enables interop between multiple
 packages: An `AggregateTransitionProvider` might gather the transitions from a number of modules, resulting in a state
 machine built from many loosely coupled fragments.
