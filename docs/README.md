@@ -31,29 +31,6 @@ sources (eg. memory, db, Redis)
 
 ### 2.1 - [`StateMachineInterface`](https://github.com/NoemPHP/state-machine-interface/blob/master/src/StateMachineInterface.php)
 
-```php:src/StateMachineInterface.php
-<?php
-
-namespace Noem\State;
-
-use Noem\State\Transition\TransitionInterface;
-
-interface StateMachineInterface
-{
-
-    /**
-     * Implementing methods MUST receive a TransitionInterface object from a TransitionProviderInterface.
-     * If a transition object is returned, its target state MUST be transitioned to.
-     *
-     * @see TransitionInterface::target()
-     *
-     * @param object $payload
-     * @return StateMachineInterface
-     */
-    public function trigger(object $payload): self;
-}
-
-```
 
 The purpose of a class implementing this interface is to keep track of the active state as well as to delegate events
 from the outside application in case the extended `ObservableStateMachineInterface` is used . It's easy to be tempted to
@@ -89,76 +66,12 @@ Use-cases for `StateMachineObserver`s include:
 * Logging
 * Bridging to external event systems
 
-```php:src/ObservableStateMachineInterface.php
-<?php
-
-namespace Noem\State;
-
-use Noem\State\Observer;
-
-/**
- * The contract of a state machine implementation that is able to notify outside code of state changes.
- *
- * The machine's current state is an implicit observer. That means that a StateInterface MAY implement
- * one of the observer interfaces as well. When transitioning,
- * this MUST be checked and the state object needs to be notified as needed
- *
- */
-interface ObservableStateMachineInterface extends StateMachineInterface
-{
-
-    /**
-     * Adds an observer to the stack.
-     * When a state machine exits a state, all ExitStateObservers MUST be notified.
-     * When a new state is entered, all EnterStateObservers MUST be notified
-     * When a state action is triggered (on implementors of StatefulActorInterface),
-     * all ActionObservers MUST be notified
-     *
-     * @see Observer\EnterStateObserver, Observer\ExitStateObserver, Observer\ActionObserver, ActorInterface
-     *
-     * @param Observer\StateMachineObserver $observer
-     *
-     * @return self
-     */
-    public function attach(Observer\StateMachineObserver $observer): self;
-
-    /**
-     * Removes an observer from the stack.
-     * The observer MUST no longer be notified of state changes
-     *
-     * @param Observer\StateMachineObserver $observer
-     *
-     * @return self
-     */
-    public function detach(Observer\StateMachineObserver $observer): self;
-}
-
-```
 
 **ActorInterface**
 
 Classes implementing this interface provide a way to process to arbitrary `object` payloads via an `action($payload)`
 method.
 
-```php:src/ActorInterface.php
-<?php
-
-namespace Noem\State;
-
-interface ActorInterface
-{
-
-    /**
-     * Carry out an action corresponding to the given payload object
-     *
-     * @param object $payload Arbitrary data relevant for the desired action.
-     *
-     * @return object The payload object - modified by the implementing method if applicable
-     */
-    public function action(object $payload): object;
-}
-
-```
 This is the primary way to interface the application logic with the state machine. Whenever state-dependent behaviour or data is required,
 a corresponding action can be requested from the state machine.
 
@@ -193,28 +106,6 @@ class MyFSM implements StateMachineInterface, ActorInterface {
 
 The TransitionProvider is responsible for returning a valid transition based on the given action and the current
 state.
-
-```php:src/Transition/TransitionProviderInterface.php
-<?php
-
-namespace Noem\State\Transition;
-
-use Noem\State\StateInterface;
-
-interface TransitionProviderInterface
-{
-
-    /**
-     * Return a Transition object that matches the given state and trigger
-     *
-     * @param StateInterface $state For comparing the source state against
-     * @param object $trigger For evaluating whether the transition is enabled
-     *
-     * @return TransitionInterface|null
-     */
-    public function getTransitionForTrigger(StateInterface $state, object $trigger): ?TransitionInterface;
-}
-```
 
 It is similar in intention and function to PSR-14's ListenerProvider:
 
