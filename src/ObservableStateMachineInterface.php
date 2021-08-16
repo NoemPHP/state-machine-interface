@@ -2,11 +2,7 @@
 
 namespace Noem\State;
 
-use Noem\State\StatefulActorInterface;
-use Noem\State\Observer\ActionObserver;
-use Noem\State\Observer\EnterStateObserver;
-use Noem\State\Observer\ExitStateObserver;
-use Noem\State\Observer\StateMachineObserver;
+use Noem\State\Observer;
 
 /**
  * The contract of a state machine implementation that is able to notify outside code of state changes.
@@ -31,19 +27,19 @@ interface ObservableStateMachineInterface extends StateMachineInterface
      * @see ActionObserver
      * @see StatefulActorInterface
      *
-     * @param StateMachineObserver $observer
+     * @param Observer\StateMachineObserver $observer
      *
      * @return self
      */
-    public function attach(StateMachineObserver $observer): ObservableStateMachineInterface;
+    public function attach(Observer\StateMachineObserver $observer): ObservableStateMachineInterface;
 
     /**
      * Removes an observer from the stack.
      * The observer MUST no longer be notified of state changes
      *
-     * @param StateMachineObserver $observer
+     * @param Observer\StateMachineObserver $observer
      *
      * @return ObservableStateMachineInterface
      */
-    public function detach(StateMachineObserver $observer): ObservableStateMachineInterface;
+    public function detach(Observer\StateMachineObserver $observer): ObservableStateMachineInterface;
 }
