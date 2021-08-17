@@ -16,6 +16,6 @@ jobs:
           -   name: "Sync embedded code blocks"
               run: "composer embed-files"
           -   name: "Run PHPCBF"
-              run: "./vendor/bin/phpcbf; if [ $? -eq 1 ]; then exit 0; fi"
+              run: "./vendor/bin/phpcbf > /dev/null || true"
           -   uses: "stefanzweifel/git-auto-commit-action@v4"
 
