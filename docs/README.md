@@ -178,22 +178,6 @@ The TransitionProvider is responsible for returning a valid transition based on 
 state.
 
 [embedmd]:# (../src/Transition/TransitionProviderInterface.php php interface.*})
-```php
-interface TransitionProviderInterface
-{
-
-    /**
-     * Return a Transition object that matches the given state and trigger
-     *
-     * @param StateInterface $state For comparing the source state against
-     * @param object $trigger For evaluating whether the transition is enabled
-     *
-     * @return TransitionInterface|null
-     */
-    public function getTransitionForTrigger(StateInterface $state, object $trigger): ?TransitionInterface;
-}
-```
-
 
 It is similar in intention and function to PSR-14's ListenerProvider:
 
