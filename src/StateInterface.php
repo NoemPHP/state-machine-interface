@@ -11,5 +11,4 @@ interface StateInterface extends \Stringable
      * It SHOULD be preferred over scalar string comparisons whenever possible
      */
     public function equals(string|self $otherState): bool;
-
 }
