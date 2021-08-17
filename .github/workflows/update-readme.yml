@@ -1,24 +1,19 @@
 name: Embed code in README
 
 on:
-  workflow_dispatch:
-  push:
+    workflow_dispatch:
+    push:
 
 jobs:
-  embed-code:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          #persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-#          ref: refs/heads/${{ github.head_ref }}
-          
-      - name: Markdown Embed Code From File - Fork
-        uses: technology-studio-forks/markdown-embed-code@v1.1.0
-        with:
-          markdown: "docs/README.md"
-          token: ${{ secrets.GITHUB_TOKEN }}
-          message: "synchronizing Readme"
-          silent: true
+    embed-code:
+        runs-on: ubuntu-latest
+        steps:
+          -   uses: "actions/checkout@v2"
+          -   uses: "shivammathur/setup-php@v2"
+              with:
+                php-version: "8.0"
+          -   uses: "ramsey/composer-install@v1"
+          -   name: "Run PHPUnit"
+              run: "composer embed-files"
+          -   uses: "stefanzweifel/git-auto-commit-action@v4"
 
