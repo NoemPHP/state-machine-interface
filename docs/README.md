@@ -36,7 +36,6 @@ from the outside application in case the extended `ObservableStateMachineInterfa
 cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some
 expected responsibility away from the class.
 
-[embedmd]:# (../src/StateMachineInterface.php php interface.*})
 ```php
 interface StateMachineInterface
 {
@@ -53,10 +52,6 @@ interface StateMachineInterface
     public function trigger(object $payload): self;
 }
 ```
-
-
-
-
 
 #### 2.1.1 - Performing transitions
 
@@ -80,7 +75,6 @@ This interface defines an Observer pattern segregated into 3 areas of interest:
 * Exiting a state
 * Performing an action
 
-[embedmd]:# (../src/ObservableStateMachineInterface.php php interface\s.*})
 ```php
 interface ObservableStateMachineInterface extends StateMachineInterface
 {
@@ -124,7 +118,6 @@ Use-cases for `StateMachineObserver`s include:
 Classes implementing this interface provide a way to process to arbitrary `object` payloads via an `action($payload)`
 method.
 
-[embedmd]:# (../src/ActorInterface.php php interface.*})
 ```php
 interface ActorInterface
 {
@@ -139,8 +132,6 @@ interface ActorInterface
     public function action(object $payload): object;
 }
 ```
-
-
 
 This is the primary way to interface the application logic with the state machine. Whenever state-dependent behaviour or data is required,
 a corresponding action can be requested from the state machine.
@@ -177,7 +168,6 @@ class MyFSM implements StateMachineInterface, ActorInterface {
 The TransitionProvider is responsible for returning a valid transition based on the given action and the current
 state.
 
-[embedmd]:# (../src/Transition/TransitionProviderInterface.php php interface.*})
 ```php
 interface TransitionProviderInterface
 {
@@ -193,7 +183,6 @@ interface TransitionProviderInterface
     public function getTransitionForTrigger(StateInterface $state, object $trigger): ?TransitionInterface;
 }
 ```
-
 
 It is similar in intention and function to PSR-14's ListenerProvider:
 
