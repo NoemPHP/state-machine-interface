@@ -13,7 +13,9 @@ jobs:
               with:
                 php-version: "8.0"
           -   uses: "ramsey/composer-install@v1"
-          -   name: "Run PHPUnit"
+          -   name: "Sync embedded code blocks"
               run: "composer embed-files"
+          -   name: "Run PHPCBF"
+              run: "./vendor/bin/phpcbf"
           -   uses: "stefanzweifel/git-auto-commit-action@v4"
 
