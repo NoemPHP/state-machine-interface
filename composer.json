@@ -8,8 +8,11 @@
             "email": "email@example.com"
         }
     ],
-    "require": {},
-    "require-dev": {},
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require-dev": {
+        "noem/composer-file-embed": "dev-master"
+    },
     "autoload": {
         "psr-4": {
             "Noem\\State\\": "src/"

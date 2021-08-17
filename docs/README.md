@@ -36,6 +36,28 @@ from the outside application in case the extended `ObservableStateMachineInterfa
 cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some
 expected responsibility away from the class.
 
+[embedmd]:# (../src/StateMachineInterface.php php interface.*})
+```php
+interface StateMachineInterface
+{
+
+    /**
+     * Implementing methods MUST receive a TransitionInterface object from a TransitionProviderInterface.
+     * If a transition object is returned, its target state MUST be transitioned to.
+     *
+     * @see TransitionInterface::target()
+     *
+     * @param object $payload
+     * @return StateMachineInterface
+     */
+    public function trigger(object $payload): self;
+}
+```
+
+
+
+
+
 #### 2.1.1 - Performing transitions
 
 Consequently, the only required method on the base interface is a way to react to an external `trigger` (-> event). When
@@ -58,6 +80,38 @@ This interface defines an Observer pattern segregated into 3 areas of interest:
 * Exiting a state
 * Performing an action
 
+[embedmd]:# (../src/ObservableStateMachineInterface.php php interface\s.*})
+```php
+interface ObservableStateMachineInterface extends StateMachineInterface
+{
+
+    /**
+     * Adds an observer to the stack.
+     * When a state machine exits a state, all ExitStateObservers MUST be notified.
+     * When a new state is entered, all EnterStateObservers MUST be notified
+     * When a state action is triggered (on implementors of StatefulActorInterface),
+     * all ActionObservers MUST be notified
+     *
+     * @see Observer\EnterStateObserver, Observer\ExitStateObserver, Observer\ActionObserver, ActorInterface
+     *
+     * @param Observer\StateMachineObserver $observer
+     *
+     * @return self
+     */
+    public function attach(Observer\StateMachineObserver $observer): self;
+
+    /**
+     * Removes an observer from the stack.
+     * The observer MUST no longer be notified of state changes
+     *
+     * @param Observer\StateMachineObserver $observer
+     *
+     * @return self
+     */
+    public function detach(Observer\StateMachineObserver $observer): self;
+}
+```
+
 State machines can therefore be written without being aware of any event-handling logic, let along providing their own.
 Use-cases for `StateMachineObserver`s include:
 
@@ -69,6 +123,24 @@ Use-cases for `StateMachineObserver`s include:
 
 Classes implementing this interface provide a way to process to arbitrary `object` payloads via an `action($payload)`
 method.
+
+[embedmd]:# (../src/ActorInterface.php php interface.*})
+```php
+interface ActorInterface
+{
+
+    /**
+     * Carry out an action corresponding to the given payload object
+     *
+     * @param object $payload Arbitrary data relevant for the desired action.
+     *
+     * @return object The payload object - modified by the implementing method if applicable
+     */
+    public function action(object $payload): object;
+}
+```
+
+
 
 This is the primary way to interface the application logic with the state machine. Whenever state-dependent behaviour or data is required,
 a corresponding action can be requested from the state machine.
@@ -104,6 +176,24 @@ class MyFSM implements StateMachineInterface, ActorInterface {
 
 The TransitionProvider is responsible for returning a valid transition based on the given action and the current
 state.
+
+[embedmd]:# (../src/Transition/TransitionProviderInterface.php php interface.*})
+```php
+interface TransitionProviderInterface
+{
+
+    /**
+     * Return a Transition object that matches the given state and trigger
+     *
+     * @param StateInterface $state For comparing the source state against
+     * @param object $trigger For evaluating whether the transition is enabled
+     *
+     * @return TransitionInterface|null
+     */
+    public function getTransitionForTrigger(StateInterface $state, object $trigger): ?TransitionInterface;
+}
+```
+
 
 It is similar in intention and function to PSR-14's ListenerProvider:
 
