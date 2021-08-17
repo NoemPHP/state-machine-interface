@@ -58,6 +58,7 @@ interface StateMachineInterface
 
 
 
+
 #### 2.1.1 - Performing transitions
 
 Consequently, the only required method on the base interface is a way to react to an external `trigger` (-> event). When
@@ -112,6 +113,7 @@ interface ObservableStateMachineInterface extends StateMachineInterface
 }
 ```
 
+
 State machines can therefore be written without being aware of any event-handling logic, let along providing their own.
 Use-cases for `StateMachineObserver`s include:
 
@@ -139,6 +141,7 @@ interface ActorInterface
     public function action(object $payload): object;
 }
 ```
+
 
 
 
@@ -178,6 +181,7 @@ The TransitionProvider is responsible for returning a valid transition based on 
 state.
 
 [embedmd]:# (../src/Transition/TransitionProviderInterface.php php interface.*})
+
 
 It is similar in intention and function to PSR-14's ListenerProvider:
 
