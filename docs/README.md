@@ -36,23 +36,8 @@ from the outside application in case the extended `ObservableStateMachineInterfa
 cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some
 expected responsibility away from the class.
 
-[embedmd]:# (../src/StateMachineInterface.php php interface.*})
-```php
-interface StateMachineInterface
-{
+[embedmd]:# (../src/StateMachineInterfaceNOT.php php interface.*})
 
-    /**
-     * Implementing methods MUST receive a TransitionInterface object from a TransitionProviderInterface.
-     * If a transition object is returned, its target state MUST be transitioned to.
-     *
-     * @see TransitionInterface::target()
-     *
-     * @param object $payload
-     * @return StateMachineInterface
-     */
-    public function trigger(object $payload): self;
-}
-```
 
 
 
