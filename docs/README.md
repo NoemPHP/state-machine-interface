@@ -39,7 +39,6 @@ cram lots of logic and responsibility into this class, which is why the interfac
 expected responsibility away from the class.
 
 [embed]:# (../src/StateMachineInterface.php php interface.*})
-
 ```php
 interface StateMachineInterface
 {
@@ -81,7 +80,6 @@ This interface defines an Observer pattern segregated into 3 areas of interest:
 * Performing an action
 
 [embed]:# (../src/ObservableStateMachineInterface.php php interface\s.*})
-
 ```php
 interface ObservableStateMachineInterface extends StateMachineInterface
 {
@@ -126,7 +124,6 @@ Classes implementing this interface provide a way to process to arbitrary `objec
 method.
 
 [embed]:# (../src/ActorInterface.php php interface.*})
-
 ```php
 interface ActorInterface
 {
@@ -177,7 +174,6 @@ class MyFSM implements StateMachineInterface, ActorInterface {
 The TransitionProvider is responsible for returning a valid transition based on the given action and the current state.
 
 [embed]:# (../src/Transition/TransitionProviderInterface.php php interface.*})
-
 ```php
 interface TransitionProviderInterface
 {
