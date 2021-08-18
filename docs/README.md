@@ -39,6 +39,7 @@ cram lots of logic and responsibility into this class, which is why the interfac
 expected responsibility away from the class.
 
 [embedmd]:# (../src/StateMachineInterface.php php interface.*})
+
 ```php
 interface StateMachineInterface
 {
@@ -54,7 +55,9 @@ interface StateMachineInterface
      */
     public function trigger(object $payload): self;
 }
-```#### 2.1.1 - Performing transitions
+```
+
+#### 2.1.1 - Performing transitions
 
 Consequently, the only required method on the base interface is a way to react to an external `trigger` (-> event). When
 the state machine is triggered, is **MUST** receive a valid `Transition` object from a `TransitionProvider`.
@@ -78,6 +81,7 @@ This interface defines an Observer pattern segregated into 3 areas of interest:
 * Performing an action
 
 [embedmd]:# (../src/ObservableStateMachineInterface.php php interface\s.*})
+
 ```php
 interface ObservableStateMachineInterface extends StateMachineInterface
 {
@@ -122,6 +126,7 @@ Classes implementing this interface provide a way to process to arbitrary `objec
 method.
 
 [embedmd]:# (../src/ActorInterface.php php interface.*})
+
 ```php
 interface ActorInterface
 {
@@ -172,6 +177,7 @@ class MyFSM implements StateMachineInterface, ActorInterface {
 The TransitionProvider is responsible for returning a valid transition based on the given action and the current state.
 
 [embedmd]:# (../src/Transition/TransitionProviderInterface.php php interface.*})
+
 ```php
 interface TransitionProviderInterface
 {
