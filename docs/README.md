@@ -38,7 +38,8 @@ from the outside application in case the extended `ObservableStateMachineInterfa
 cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some
 expected responsibility away from the class.
 
-[embedmd]:# (../src/StateMachineInterface.php php interface.*})
+[embed]:# (../src/StateMachineInterface.php php interface.*})
+
 ```php
 interface StateMachineInterface
 {
@@ -79,7 +80,8 @@ This interface defines an Observer pattern segregated into 3 areas of interest:
 * Exiting a state
 * Performing an action
 
-[embedmd]:# (../src/ObservableStateMachineInterface.php php interface\s.*})
+[embed]:# (../src/ObservableStateMachineInterface.php php interface\s.*})
+
 ```php
 interface ObservableStateMachineInterface extends StateMachineInterface
 {
@@ -123,7 +125,8 @@ Use-cases for `StateMachineObserver`s include:
 Classes implementing this interface provide a way to process to arbitrary `object` payloads via an `action($payload)`
 method.
 
-[embedmd]:# (../src/ActorInterface.php php interface.*})
+[embed]:# (../src/ActorInterface.php php interface.*})
+
 ```php
 interface ActorInterface
 {
@@ -173,7 +176,8 @@ class MyFSM implements StateMachineInterface, ActorInterface {
 
 The TransitionProvider is responsible for returning a valid transition based on the given action and the current state.
 
-[embedmd]:# (../src/Transition/TransitionProviderInterface.php php interface.*})
+[embed]:# (../src/Transition/TransitionProviderInterface.php php interface.*})
+
 ```php
 interface TransitionProviderInterface
 {
