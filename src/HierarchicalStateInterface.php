@@ -2,7 +2,6 @@
 
 namespace Noem\State;
 
-
 interface HierarchicalStateInterface extends NestedStateInterface
 {
 

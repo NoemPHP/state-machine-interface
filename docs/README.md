@@ -43,6 +43,8 @@ expected responsibility away from the class.
 
 
 
+
+
 #### 2.1.1 - Performing transitions
 
 Consequently, the only required method on the base interface is a way to react to an external `trigger` (-> event). When
@@ -97,6 +99,8 @@ interface ObservableStateMachineInterface extends StateMachineInterface
 }
 ```
 
+
+
 State machines can therefore be written without being aware of any event-handling logic, let along providing their own.
 Use-cases for `StateMachineObserver`s include:
 
@@ -124,6 +128,8 @@ interface ActorInterface
     public function action(object $payload): object;
 }
 ```
+
+
 
 
 
@@ -178,8 +184,6 @@ interface TransitionProviderInterface
     public function getTransitionForTrigger(StateInterface $state, object $trigger): ?TransitionInterface;
 }
 ```
-
-
 It is similar in intention and function to PSR-14's ListenerProvider:
 
 * It reduces complexity of the state machine object by shielding it from knowledge about where states and transitions
