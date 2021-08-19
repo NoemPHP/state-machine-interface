@@ -5,7 +5,6 @@ This repository contains contracts for building and consuming event-based finite
 
 ## Table of contents
 {: .no_toc .text-delta }
-
 * [The pretty GH Pages version of this document shows a nice table of contents here](https://noemphp.github.io/state-machine-interface/)
   {:toc}
 
@@ -36,7 +35,8 @@ from the outside application in case the extended `ObservableStateMachineInterfa
 cram lots of logic and responsibility into this class, which is why the interfaces presented here deliberately keep some
 expected responsibility away from the class.
 
-[embed]:# (path: ../src/StateMachineInterface.php, match: 'interface.*}')
+[embed]:# "path: ../src/StateMachineInterface.php, match: 'interface.*}'"
+
 ```php
 interface StateMachineInterface
 {
@@ -53,6 +53,7 @@ interface StateMachineInterface
     public function trigger(object $payload): self;
 }
 ```
+
 #### 2.1.1 - Performing transitions
 
 Consequently, the only required method on the base interface is a way to react to an external `trigger` (-> event). When
@@ -76,7 +77,8 @@ This interface defines an Observer pattern segregated into 3 areas of interest:
 * Exiting a state
 * Performing an action
 
-[embed]:# (path: ../src/ObservableStateMachineInterface.php, match: 'interface\s.*}')
+[embed]:# "path: ../src/ObservableStateMachineInterface.php, match: 'interface\s.*}'"
+
 ```php
 interface ObservableStateMachineInterface extends StateMachineInterface
 {
@@ -120,7 +122,8 @@ Use-cases for `StateMachineObserver`s include:
 Classes implementing this interface provide a way to process to arbitrary `object` payloads via an `action($payload)`
 method.
 
-[embed]:# (path: ../src/ActorInterface.php, match: 'interface.*}')
+[embed]:# "path: ../src/ActorInterface.php, match: 'interface.*}'"
+
 ```php
 interface ActorInterface
 {
@@ -170,7 +173,8 @@ class MyFSM implements StateMachineInterface, ActorInterface {
 
 The TransitionProvider is responsible for returning a valid transition based on the given action and the current state.
 
-[embed]:# (path: ../src/Transition/TransitionProviderInterface.php, match: 'interface.*}')
+[embed]:# "path: ../src/Transition/TransitionProviderInterface.php, match: 'interface.*}'"
+
 ```php
 interface TransitionProviderInterface
 {
