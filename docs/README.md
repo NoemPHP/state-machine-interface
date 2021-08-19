@@ -1,11 +1,12 @@
 <!-- @formatter:off -->
 # State Machine Interface
 {: .no_toc } 
+
 This repository contains contracts for building and consuming event-based finite state machines.
 ## Table of contents
 {: .no_toc .text-delta }
-1. [The pretty GH Pages version of this document shows a nice table of contents here](https://noemphp.github.io/state-machine-interface/)
 
+1. [The pretty GH Pages version of this document shows a nice table of contents here](https://noemphp.github.io/state-machine-interface/)
 {:toc}
 
 ---
