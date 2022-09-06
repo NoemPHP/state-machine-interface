@@ -23,6 +23,7 @@ This repository contains contracts for building and consuming event-based finite
   though, enabling stateful behaviour in a very flexible manner.
 * **State Machine** - The main entrypoint for triggers and actions. Responsible for keeping track of the current state,
   performing transitions and notifying subscribers.
+* **Context** Metadata related to the current state 
 * **Transition Provider** - Returns a valid Transition object for any given *trigger*.
 * **State Machine Observer** - Allows outside code to subscribe to state updates.
 * **State Storage** - An abstraction layer to interface the process of loading & saving the active state with various
@@ -59,10 +60,11 @@ interface StateMachineInterface
 #### 2.1.1 - Performing transitions
 
 Consequently, the only required method on the base interface is a way to react to an external `trigger` (-> event). When
-the state machine is triggered, is **MUST** receive a valid `Transition` object from a `TransitionProvider`.
+the state machine is triggered, is **MUST** request a `Transition` object from a `TransitionProvider`. If no valid transition is returned,
+no further action is required.
 
 A state machine MAY receive a `StateStorageInterface` as an injected depency. If this is
-used, `StateStorageInterface::save()` MUST be called with the new state so that it can be saved externally.
+used, `StateStorageInterface::save()` MUST be called with the new state so that the state change can be persisted.
 
 An `ObservableStateMachineInterface` MUST notify all of its subscribers when a transition is made. More about this in
 the next section.
@@ -115,7 +117,7 @@ interface ObservableStateMachineInterface extends StateMachineInterface
 State machines can therefore be written without being aware of any event-handling logic, let along providing their own.
 Use-cases for `StateMachineObserver`s include:
 
-* Proving internal stateful behaviour defined as a state's `onEntry`, `onExit` or `action` callbacks
+* Implementing internal stateful behaviour defined as a state's `onEntry`, `onExit` or `action` callbacks
 * Logging
 * Bridging to external event systems
 
@@ -168,6 +170,21 @@ class MyFSM implements StateMachineInterface, ActorInterface {
 
 }
 ```
+
+**ContextAwareStateMachineInterface**
+
+[embed]:# "path: ../src/ContextAwareStateMachineInterface.php, match: 'interface.*}'"
+
+More sophisticated implementations might wish to store meta-data that belongs to a specific state. 
+A classic example would be a "button click":
+
+* User clicks a button. A `ButtonClicked` event is emitted. We enter the `button.held` state.
+* Transitions are now possible to `button.pressed` and `button.longPressed`, each disabled until a `ButtonReleased` event fires
+* On each `Update` action, we increase the `timeHeld` with `$machine->context($state)['timeHeld']++`
+* The button is released, causing a `ButtonReleased` event
+* The guard callbacks are firing: If `timeHeld < 500ms`, the transition to `button.pressed` is enabled. If it's `>500ms`, the transition to `button.longPressed` is enabled
+
+`ContextInterface` provides a way to store this kind of meta information without relying on an external framework or global state
 
 * * *
 
