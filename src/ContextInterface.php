@@ -22,6 +22,15 @@ interface ContextInterface extends \ArrayAccess
     public function clear(): self;
 
     /**
+     * Reset the context data to its initial values
+     * Whether to reset the state context on transitions is left for the application and/or
+     * individual entry/exit callbacks to decide.
+     *
+     * @return mixed
+     */
+    public function reset(): self;
+
+    /**
      * Replaces current context data with the specified array
      *
      * @param array $data
