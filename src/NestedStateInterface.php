@@ -14,4 +14,8 @@ interface NestedStateInterface extends StateInterface
      */
     public function parent(): ?StateInterface;
 
+    /**
+     * @return StateInterface[] This state's sub-states
+     */
+    public function children(): array;
 }

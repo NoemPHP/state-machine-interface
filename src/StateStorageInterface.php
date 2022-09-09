@@ -11,12 +11,16 @@ interface StateStorageInterface
 
     /**
      * Returns the current (stored) state
+     *
+     * @param StateInterface|null $parent
+     *
      * @return StateInterface
+     * @throws \OutOfBoundsException
      */
-    public function state(): StateInterface;
+    public function state(StateInterface $parent = null): StateInterface;
 
     /**
      * Write a new state to a storage backend
      */
-    public function save(StateInterface $stateConfiguration): void;
+    public function save(StateInterface $stateConfiguration, StateInterface $parent = null): void;
 }
