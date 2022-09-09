@@ -10,4 +10,9 @@ interface HierarchicalStateInterface extends NestedStateInterface
      * @see NestedStateInterface::children()
      */
     public function initial(): ?StateInterface;
+
+    /**
+     * @return StateInterface[] This state's sub-states
+     */
+    public function children(): array;
 }
