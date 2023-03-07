@@ -8,5 +8,5 @@ use Noem\State\StateInterface;
 interface ExitStateObserver extends StateMachineObserver
 {
 
-    public function onExitState(StateInterface $state, ObservableStateMachineInterface $machine);
+    public function onExitState(StateInterface $state, StateInterface $from, ObservableStateMachineInterface $machine);
 }

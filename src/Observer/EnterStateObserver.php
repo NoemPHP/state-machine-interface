@@ -7,6 +7,5 @@ use Noem\State\StateInterface;
 
 interface EnterStateObserver extends StateMachineObserver
 {
-
-    public function onEnterState(StateInterface $state, ObservableStateMachineInterface $machine);
+    public function onEnterState(StateInterface $state, StateInterface $from, ObservableStateMachineInterface $machine);
 }
