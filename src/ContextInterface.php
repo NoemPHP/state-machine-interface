@@ -38,4 +38,15 @@ interface ContextInterface extends \ArrayAccess
      * @return void
      */
     public function replace(array $data): self;
+
+    /**
+     * Sets a new trigger object.
+     * It is intended to be called during a transition to a new state, allowing context data to be retained
+     * while setting a new trigger
+     *
+     * @param object $trigger
+     *
+     * @return $this
+     */
+    public function withTrigger(object $trigger): self;
 }
